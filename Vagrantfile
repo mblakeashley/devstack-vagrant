@@ -103,8 +103,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #
   # The boot time is long for these, so I recommend that you convert to a local
   # version as soon as you can.
-  config.vm.box = conf['box_name'] || 'ubuntu/trusty64'
-  config.vm.box_url = conf['box_url'] if conf['box_url']
+    config.vm.provider :virtualbox do |vb|
+    config.vm.box = conf['box_name'] || 'ubuntu/trusty64'
+    config.vm.box_url = conf['box_url'] if conf['box_url']
+    vb.customize ["modifyvm", :id, "--memory", "8192"]
+    vb.customize ["modifyvm", :id, "--cpus", "4"]
+  end
 
   if Vagrant.has_plugin?("vagrant-cachier")
     config.cache.scope = :box
