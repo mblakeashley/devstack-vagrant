@@ -16,7 +16,7 @@ class devstack(
   if $devstack_branch {
     $branch = $devstack_branch
   } else {
-    $branch = 'master'
+    $branch = 'stable/mitaka'
   }
 
   exec { 'devstack_clone':
